@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Operations · Quorum ETA (concept) · Anchorage Digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.454.0/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+<nav class="rail">
+  <div class="mark" aria-label="Anchorage Digital">
+    <svg viewBox="0 0 40 30" width="34" height="26"><g fill="#fff"><path d="M20 0l7 4-7 4-7-4z"/><path d="M9 7l7 4-7 4-7-4z"/><path d="M31 7l7 4-7 4-7-4z"/><path d="M20 14l7 4-7 4-7-4z"/></g></svg>
+  </div>
+  <a class="rail-i" title="Dashboard"><i data-lucide="house"></i></a>
+  <a class="rail-i on" title="Operations"><i data-lucide="activity"></i></a>
+  <a class="rail-i" title="Reporting"><i data-lucide="chart-column"></i></a>
+  <a class="rail-i" title="Developer"><i data-lucide="square-code"></i></a>
+  <a class="rail-i" title="Settings"><i data-lucide="settings"></i></a>
+</nav>
+<header class="top">
+  <div class="crumb">Operations</div>
+  <div class="top-r"><span class="org" id="orgName">Halyard Capital</span><span class="help"><i data-lucide="circle-help"></i><b></b></span><span class="avatar">MC</span></div>
+</header>
+
+<main class="wrap">
+  <section class="kpis">
+    <div class="kpi"><div class="kpi-t">Pending deposit attribution</div><div class="kpi-n amber" id="kDep">-</div><a class="kpi-a">Attribute deposits <i data-lucide="chevron-right"></i></a></div>
+    <div class="kpi"><div class="kpi-t">Pending operations</div><div class="kpi-n" id="kPend">-</div><a class="kpi-a">Filter by needs my approval <i data-lucide="chevron-right"></i></a></div>
+    <div class="kpi"><div class="kpi-t">Operations completed last month</div><div class="kpi-n" id="kDone">-</div><a class="kpi-a">Filter by my pending operations <i data-lucide="chevron-right"></i></a></div>
+  </section>
+
+  <section class="filters">
+    <div class="ranges"><span class="on">All</span><span>Today</span><span>Yesterday</span><span>Last week</span><span>Last month</span><span>Last year</span><span>XTD <i data-lucide="chevron-down"></i></span><span class="sep"></span><span>Custom <i data-lucide="calendar"></i></span></div>
+    <div class="spam"><span class="tog"><b></b></span>Hide spam<i data-lucide="download"></i></div>
+  </section>
+  <section class="chips"><span class="chip">Status: Pending <i data-lucide="x"></i></span><span class="add"><i data-lucide="list-filter"></i>Add filter</span><a class="clear">Clear all filters</a></section>
+
+  <section class="card review">
+    <div class="review-h"><div>Needs your review (<span id="nReview">0</span>)</div><button class="btn-w" id="reviewAll">Review all</button></div>
+    <div id="pendingRows"></div>
+  </section>
+
+  <section class="card health">
+    <div class="sec-h"><div><div class="sec-t">Quorum health <span class="new">New</span></div><div class="sec-s" id="healthSub"></div></div>
+      <div class="tabs" id="polTabs"></div></div>
+    <div class="health-grid">
+      <div>
+        <div class="hm-head"><span>Chance to clear quorum and review within 1 hour, by start time (ET)</span><span class="hm-leg"><i style="background:#3a1f22"></i>&lt;40%<i style="background:#4a3a1e"></i>40-80%<i style="background:#1d3b2c"></i>&ge;80%</span></div>
+        <div class="heat" id="heat"></div>
+      </div>
+      <div class="side">
+        <div class="stat"><div class="stat-n" id="hWork">-</div><div class="stat-t">within 1 hour, Mon-Fri 9 AM-5 PM ET</div></div>
+        <div class="sub-t">If one approver is out</div>
+        <div id="spList"></div>
+        <div class="whatif" id="whatIf"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card acc">
+    <div class="sec-h"><div><div class="sec-t">Forecast accuracy</div><div class="sec-s" id="accSub"></div></div></div>
+    <div class="acc-grid">
+      <div class="chart-box"><canvas id="relChart"></canvas></div>
+      <div class="acc-stats" id="accStats"></div>
+    </div>
+  </section>
+
+  <div class="day" id="dayLabel"></div>
+  <section id="doneRows"></section>
+
+  <footer class="foot">Unofficial concept demo by Mohith Gajjela. Not affiliated with Anchorage Digital. Synthetic data.</footer>
+</main>
+<div class="loading" id="loading"><div class="spin"></div>Fitting approver models from operation history…</div>
+<script type="module" src="app.js"></script>
+</body>
+</html>
